@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WarehouseAccountingSystemApplication {
 
 	public static void main(String[] args) {
+		System.out.println("eblan??");
 		SpringApplication.run(WarehouseAccountingSystemApplication.class, args);
 	}
 
