@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WarehouseAccountingSystemApplication {
 
 	public static void main(String[] args) {
-		System.out.println("da");
 		SpringApplication.run(WarehouseAccountingSystemApplication.class, args);
 	}
 
