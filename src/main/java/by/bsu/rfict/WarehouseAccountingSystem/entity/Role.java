@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Consumer {
+public class Role {
 
     @Id
     private Long id;
