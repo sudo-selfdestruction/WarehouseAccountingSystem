@@ -14,22 +14,19 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "")
-    private String name;
-
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
     @Column(name = "measurement_unit")
     private String measurementUnit;
 
-    @Column(name = "weight")
+    @Column(name = "total_weight")
     private short weight;
 
     @Column(name = "package")
     private boolean pack;
 
-    @Column(name = "cost")
+    @Column(name = "total_cost")
     private int cost;
 
     @Column(name = "storage_period")
@@ -37,7 +34,4 @@ public class Order {
 
     @Column(name = "order_date")
     private Date order_date;
-
-    @Column(name = "manufacturing_country")
-    private String manufacturingCountry;
 }
