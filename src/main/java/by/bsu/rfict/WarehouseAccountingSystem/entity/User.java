@@ -3,6 +3,7 @@ package by.bsu.rfict.WarehouseAccountingSystem.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,4 +28,7 @@ public class User {
 
     @Column(name = "phoneNumber")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orderList;
 }
