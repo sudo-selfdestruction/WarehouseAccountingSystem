@@ -27,4 +27,8 @@ public class Item {
 
     @Column(name = "weight")
     private short weight;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 }
