@@ -2,6 +2,7 @@ package by.bsu.rfict.WarehouseAccountingSystem.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,4 +15,7 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "userRolesList", fetch = FetchType.LAZY)
+    private List<User> userList;
 }
