@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -34,4 +35,7 @@ public class Order {
 
     @Column(name = "order_date")
     private Date order_date;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Item> itemList;
 }
