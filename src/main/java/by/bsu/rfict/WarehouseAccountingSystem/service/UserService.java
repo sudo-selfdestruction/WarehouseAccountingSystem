@@ -39,6 +39,10 @@ public class UserService {
     }
 
     public void deleteUser(User user) {
+        if (user == null) {
+            log.info("deleteUser - user doesn't exist");
+        }
+
         userRepository.delete(user);
         log.info("deleteUser - user : {} successfully deleted", user);
     }
