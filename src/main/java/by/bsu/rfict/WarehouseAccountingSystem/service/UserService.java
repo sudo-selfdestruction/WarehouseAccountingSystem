@@ -60,6 +60,19 @@ public class UserService {
         if (user == null) {
             log.info("findById - user with id {} didn't find", userId);
         }
+        log.info("findById - user with id {} successfully find", userId);
+
+        return user;
+    }
+
+    public User findByEmail(String userEmail) {
+        User user = userRepository.findUserByEmail(userEmail);
+
+        if (user == null) {
+            log.info("findById - user with email {} didn't find", userEmail);
+        }
+        log.info("findById - user with email {} successfully find", userEmail);
+
         return user;
     }
 
