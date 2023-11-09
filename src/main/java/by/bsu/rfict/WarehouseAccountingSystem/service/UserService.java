@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -45,19 +44,29 @@ public class UserService {
     }
 
     public void deleteUser(Long userId) {
-        if (userRepository.findById(userId) == null) {
-            log.info("deleteUser - user with id {} didn't find", userId);
-        }
+        User user = userRepository.findById(userId).orElse(null);
 
-        userRepository.deleteById(userId);
-        log.info("deleteUser - user with id {} successfully deleted", userId);
+        if (user == null) {
+            log.info("deleteUser - user with id {} didn't find", userId);
+        } else {
+            userRepository.deleteById(userId);
+            log.info("deleteUser - user with id {} successfully deleted", userId);
+        }
     }
 
-    public Optional<User> findById(Long userId) {
-        return userRepository.findById(userId);
+    public User findById(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user == null) {
+            log.info("findById - user with id {} didn't find", userId);
+        }
+        return user;
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        List<User> userList = userRepository.findAll();
+        log.info("findAll - found {} users", userList.size());
+
+        return userList;
     }
 }
