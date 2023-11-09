@@ -60,7 +60,7 @@ public class UserService {
         if (user == null) {
             log.info("findById - user with id {} didn't find", userId);
         }
-        log.info("findById - user with id {} successfully find", userId);
+        log.info("findById - user with id {} successfully found", userId);
 
         return user;
     }
