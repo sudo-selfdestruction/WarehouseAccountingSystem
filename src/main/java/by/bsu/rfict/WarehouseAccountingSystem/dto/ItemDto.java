@@ -3,6 +3,7 @@ package by.bsu.rfict.WarehouseAccountingSystem.dto;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.Item;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -11,7 +12,7 @@ public class ItemDto {
     private String description;
     private String manufacturingCountry;
     private int cost;
-    private short weight;
+    private double weight;
 
     public static ItemDto createItemDtoFromItem(Item item) {
         ItemDto itemDto = new ItemDto();
