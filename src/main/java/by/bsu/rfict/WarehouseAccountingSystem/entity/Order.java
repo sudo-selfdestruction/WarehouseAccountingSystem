@@ -1,14 +1,20 @@
 package by.bsu.rfict.WarehouseAccountingSystem.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,23 +24,17 @@ public class Order {
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
-    @Column(name = "measurement_unit")
-    private String measurementUnit;
-
     @Column(name = "total_weight")
-    private short weight;
-
-    @Column(name = "package")
-    private boolean pack;
+    private double weight;
 
     @Column(name = "total_cost")
-    private int cost;
+    private double cost;
 
     @Column(name = "storage_period")
-    private Date storage_period;
+    private LocalDate storage_period;
 
     @Column(name = "order_date")
-    private Date order_date;
+    private LocalDate order_date;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Item> itemList;
