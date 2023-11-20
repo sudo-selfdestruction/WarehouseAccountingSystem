@@ -1,5 +1,7 @@
 package by.bsu.rfict.WarehouseAccountingSystem.service;
 
+import by.bsu.rfict.WarehouseAccountingSystem.dto.OrderDto;
+import by.bsu.rfict.WarehouseAccountingSystem.entity.Item;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.Order;
 import by.bsu.rfict.WarehouseAccountingSystem.repository.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -21,7 +23,7 @@ public class OrderService {
         Order order = orderRepository.findById(orderId).orElse(null);
 
         if (order == null) {
-            log.info("findById - order : didn't found");
+            log.warn("findById - order : didn't found");
         }
         log.info("findById - order : {} successfully found", order);
 
@@ -57,5 +59,23 @@ public class OrderService {
         log.info("updateOrder - order : {} successfully updated", order);
 
         return order;
+    }
+
+    public double calcWeight(OrderDto orderDto) {
+        List<Item> itemList = orderDto.getItemList();
+        double orderWeight = 0;
+        for (Item item : itemList) {
+            orderWeight += item.getWeight();
+        }
+        return orderWeight;
+    }
+
+    public double calcCost(OrderDto orderDto) {
+        List<Item> itemList = orderDto.getItemList();
+        int orderCost = 0;
+        for (Item item : itemList) {
+            orderCost += item.getCost();
+        }
+        return orderCost;
     }
 }
