@@ -28,7 +28,7 @@ public class ItemController {
         return itemDto;
     }
 
-    @GetMapping("/items")
+    @GetMapping("/item")
     public List<ItemDto> getAllItems() {
         List<Item> itemList = itemService.findAll();
         List<ItemDto> itemDtoList = new ArrayList<>();
