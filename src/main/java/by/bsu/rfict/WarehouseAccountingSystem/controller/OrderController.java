@@ -26,8 +26,7 @@ public class OrderController {
     @Autowired
     private OrderMapper orderMapper;
     @PostMapping("/customer/make-order")
-    public OrderDto makeOrder (@RequestBody OrderDto orderDto) {
-        Order order = orderMapper.toOrder(orderDto);
-        return orderDto;
+    public Order makeOrder (@RequestBody OrderDto orderDto) {
+        return orderService.addOrder(orderMapper.toOrder(orderDto));
     }
 }
