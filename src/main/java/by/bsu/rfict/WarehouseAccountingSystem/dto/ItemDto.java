@@ -24,15 +24,4 @@ public class ItemDto {
 
         return itemDto;
     }
-
-    public static Item createItemFromItemDto(ItemDto itemDto) {
-        Item item = new Item();
-        item.setName(itemDto.getName());
-        item.setDescription(itemDto.getDescription());
-        item.setManufacturingCountry(itemDto.getManufacturingCountry());
-        item.setCost(itemDto.getCost());
-        item.setWeight(itemDto.getWeight());
-
-        return item;
-    }
 }
