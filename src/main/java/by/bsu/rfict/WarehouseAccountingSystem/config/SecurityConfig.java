@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .anyRequest().not().fullyAuthenticated()
+                .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/").permitAll()
+                .antMatchers("/customer/make-order").hasRole("User")
 //                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
