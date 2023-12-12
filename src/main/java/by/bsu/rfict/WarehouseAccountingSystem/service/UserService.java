@@ -7,6 +7,7 @@ import by.bsu.rfict.WarehouseAccountingSystem.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -85,5 +86,9 @@ public class UserService {
         log.info("findAll - found {} users", userList.size());
 
         return userList;
+    }
+
+    public User getUserByLogin() {
+        return userRepository.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }
