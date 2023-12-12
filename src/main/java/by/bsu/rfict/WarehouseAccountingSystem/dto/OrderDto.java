@@ -10,13 +10,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDto {
-    private List<Item> itemList;
-    private double cost;
-    private double weight;
+    private List<ItemDto> itemDtoList;
+    private String description;
 }
