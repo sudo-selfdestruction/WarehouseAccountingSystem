@@ -3,6 +3,7 @@ package by.bsu.rfict.WarehouseAccountingSystem.service;
 import by.bsu.rfict.WarehouseAccountingSystem.dto.OrderDto;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.Item;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.Order;
+import by.bsu.rfict.WarehouseAccountingSystem.entity.User;
 import by.bsu.rfict.WarehouseAccountingSystem.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.util.List;
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    private UserService userService;
 
     public Order findById(Long orderId) {
         Order order = orderRepository.findById(orderId).orElse(null);
@@ -38,10 +40,12 @@ public class OrderService {
     }
 
     public Order addOrder(Order order) {
-        Order newOrder = orderRepository.save(order);
+        User user = userService.getUserByLogin();
+        order.setUser(user);
+        order = orderRepository.save(order);
         log.info("addOrder - order : {} successfully saved");
 
-        return newOrder;
+        return order;
     }
 
     public void deleteOrder(Order order) {
@@ -61,8 +65,7 @@ public class OrderService {
         return order;
     }
 
-    public double calcWeight(OrderDto orderDto) {
-        List<Item> itemList = orderDto.getItemList();
+    public double calcWeight(List<Item> itemList) {
         double orderWeight = 0;
         for (Item item : itemList) {
             orderWeight += item.getWeight();
@@ -70,8 +73,7 @@ public class OrderService {
         return orderWeight;
     }
 
-    public double calcCost(OrderDto orderDto) {
-        List<Item> itemList = orderDto.getItemList();
+    public double calcCost(List<Item> itemList) {
         int orderCost = 0;
         for (Item item : itemList) {
             orderCost += item.getCost();
