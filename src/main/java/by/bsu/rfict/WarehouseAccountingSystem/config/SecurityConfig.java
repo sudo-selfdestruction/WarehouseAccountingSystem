@@ -1,6 +1,8 @@
 package by.bsu.rfict.WarehouseAccountingSystem.config;
 
+import by.bsu.rfict.WarehouseAccountingSystem.service.CustomUserDetailService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,8 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -23,8 +27,8 @@ public class SecurityConfig {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/").permitAll()
-                .antMatchers("/customer/make-order").hasRole("User")
-//                .anyRequest().authenticated()
+                .antMatchers("/customer/make-order").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
         return http.build();
