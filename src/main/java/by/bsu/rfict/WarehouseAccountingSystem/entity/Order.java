@@ -31,7 +31,7 @@ public class Order {
     private double cost;
 
     @Column(name = "storage_period")
-    private LocalDate storage_period;
+    private int storage_period;
 
     @Column(name = "order_date")
     private LocalDate order_date;
