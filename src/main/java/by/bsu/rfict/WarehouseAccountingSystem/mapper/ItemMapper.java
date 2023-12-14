@@ -5,6 +5,7 @@ import by.bsu.rfict.WarehouseAccountingSystem.dto.OrderDto;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.Item;
 import by.bsu.rfict.WarehouseAccountingSystem.service.ItemService;
 import by.bsu.rfict.WarehouseAccountingSystem.service.OrderService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,20 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class ItemMapper {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private static ItemService itemService;
+    private ItemService itemService;
 
-    public static Item toItem(ItemDto itemDto) {
+    public Item toItem(ItemDto itemDto) {
         return itemService.findByName(itemDto.getName());
     }
 
-    public static List<Item> toItemList(OrderDto orderDto) {
+    public List<Item> toItemList(OrderDto orderDto) {
         List<Item> itemList = new ArrayList<Item>();
         for (ItemDto itemDto: orderDto.getItemDtoList()) {
-            itemList.add(toItem(itemDto));
+            itemList.add(itemService.findByName(itemDto.getName()));
         }
         return itemList;
     }
