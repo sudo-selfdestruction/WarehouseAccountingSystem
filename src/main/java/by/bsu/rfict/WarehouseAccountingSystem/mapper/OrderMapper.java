@@ -27,5 +27,11 @@ public class OrderMapper {
                 .description(orderDto.getDescription())
                 .storage_period(7)
                 .build();
-    } 
+    }
+    public OrderDto toOrderDto(Order order) {
+        return OrderDto.builder()
+                .itemDtoList(itemMapper.toItemDtoList(order.getItemList()))
+                .description(order.getDescription())
+                .build();
+    }
 }
