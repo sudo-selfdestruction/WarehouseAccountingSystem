@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/").permitAll()
-                .antMatchers("/customer/make-order").hasRole("USER")
+                .antMatchers("/customer/make-order", "customer/order/{id}").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
