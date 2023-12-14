@@ -84,7 +84,6 @@ public class UserService {
     public List<User> findAll() {
         List<User> userList = userRepository.findAll();
         log.info("findAll - found {} users", userList.size());
-
         return userList;
     }
 
