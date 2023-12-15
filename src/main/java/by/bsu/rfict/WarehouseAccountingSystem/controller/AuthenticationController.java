@@ -4,6 +4,7 @@ import by.bsu.rfict.WarehouseAccountingSystem.dto.LoginRequestDto;
 import by.bsu.rfict.WarehouseAccountingSystem.dto.UserDto;
 import by.bsu.rfict.WarehouseAccountingSystem.entity.User;
 import by.bsu.rfict.WarehouseAccountingSystem.exception.UserNotFoundException;
+import by.bsu.rfict.WarehouseAccountingSystem.mapper.UserMapper;
 import by.bsu.rfict.WarehouseAccountingSystem.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthenticationController {
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -29,7 +32,7 @@ public class AuthenticationController {
 
         if (user != null && bCryptPasswordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             log.info("login - user : {} successfully login", user);
-            return UserDto.createUserDtoFromUser(user);
+            return userMapper.toUserDto(user);
         } else {
             throw new UserNotFoundException("no user with such email/password");
         }
@@ -37,9 +40,8 @@ public class AuthenticationController {
 
     @PostMapping("user/sign-up")
     public UserDto registerUser(@RequestBody UserDto userDto) {
-        User user = UserDto.createUserFromUserDto(userDto);
+        User user = userMapper.toUser(userDto);
         userService.registerUser(user);
-
         return userDto;
     }
 }
