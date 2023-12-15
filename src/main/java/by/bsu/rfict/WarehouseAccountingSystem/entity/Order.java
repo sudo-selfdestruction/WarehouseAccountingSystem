@@ -1,5 +1,6 @@
 package by.bsu.rfict.WarehouseAccountingSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,7 +37,11 @@ public class Order {
     @Column(name = "order_date")
     private LocalDate order_date;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "order_items",
+            joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
     private List<Item> itemList;
 
     @ManyToOne(fetch = FetchType.LAZY)
