@@ -32,6 +32,7 @@ public class OrderMapper {
         return OrderDto.builder()
                 .itemDtoList(itemMapper.toItemDtoList(order.getItemList()))
                 .description(order.getDescription())
+                .cost(order.getCost())
                 .build();
     }
 }

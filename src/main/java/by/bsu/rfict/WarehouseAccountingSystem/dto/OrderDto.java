@@ -16,5 +16,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderDto {
     private List<ItemDto> itemDtoList;
+    private Double cost;
     private String description;
 }
