@@ -28,7 +28,6 @@ public class ItemController {
         log.info("getItem - item : {} ", item);
         return itemDto;
     }
-
     @GetMapping("/item")
     public List<ItemDto> getAllItems() {
         List<Item> itemList = itemService.findAll();
