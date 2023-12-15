@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/").permitAll()
+                .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/", "http://localhost:8080/swagger-ui/index.html#/").permitAll()
                 .antMatchers("/customer/make-order", "customer/order/{id}").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
