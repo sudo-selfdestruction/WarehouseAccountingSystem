@@ -1,8 +1,10 @@
 package by.bsu.rfict.WarehouseAccountingSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -28,7 +30,7 @@ public class Item {
     @Column(name = "weight")
     private double weight;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Order order;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "itemList", fetch = FetchType.LAZY)
+    private List<Order> orderList;
 }
