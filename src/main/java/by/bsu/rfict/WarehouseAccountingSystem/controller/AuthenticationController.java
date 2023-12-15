@@ -29,7 +29,6 @@ public class AuthenticationController {
 
         if (user != null && bCryptPasswordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             log.info("login - user : {} successfully login", user);
-
             return UserDto.createUserDtoFromUser(user);
         } else {
             throw new UserNotFoundException("no user with such email/password");
