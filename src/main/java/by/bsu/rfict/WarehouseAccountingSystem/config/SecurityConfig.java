@@ -26,8 +26,10 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/", "http://localhost:8080/swagger-ui/index.html#/").permitAll()
-                .antMatchers("/customer/make-order", "customer/order/{id}").hasRole("USER")
+                .antMatchers("/user/sign-up", "/user/login", "/item", "/item/{id}", "/", "/swagger-ui/index.html#/").permitAll()
+                .antMatchers("/customer/make-order", "customer/order/{id}", "/cabinet").hasRole("USER")
+                .antMatchers("/admin/user/{id}", "/admin/users").hasRole("ADMIN")
+                .antMatchers().hasRole("/COURIER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
